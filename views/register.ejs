@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng ký | Coffee Management System</title>
+
+  <link rel="stylesheet" href="/css/auth.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h1>Coffee Management System</h1>
+    <p class="subtitle">
+      Hệ thống quản lý quán cà phê
+    </p>
+
+    <h3 class="form-title">Tạo tài khoản</h3>
+
+    <form id="registerForm">
+      <input
+        type="text"
+        id="name"
+        placeholder="Họ và tên"
+        required
+      />
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Email"
+        required
+      />
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Mật khẩu"
+        required
+      />
+
+      <button type="submit">Đăng ký</button>
+    </form>
+
+    <p id="message" class="message"></p>
+
+    <p class="switch-link">
+      Đã có tài khoản?
+      <a href="/login">Đăng nhập</a>
+    </p>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

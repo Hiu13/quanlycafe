@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trang chủ | Coffee Management System</title>
+
+  <link rel="stylesheet" href="/css/auth.css" />
+
+  <style>
+    .home-container {
+      text-align: center;
+    }
+
+    .home-container h1 {
+      margin-bottom: 10px;
+    }
+
+    .home-desc {
+      margin-bottom: 25px;
+      color: #555;
+      font-size: 15px;
+    }
+
+    .home-actions {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: #6f4e37;
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #efe6dd;
+      color: #5b3924;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container home-container">
+    <h1>Coffee Management System</h1>
+    <p class="subtitle">
+      Hệ thống quản lý quán cà phê
+    </p>
+
+    <p class="home-desc">
+      Quản lý đơn hàng, thực đơn, nhân viên và khách hàng một cách hiệu quả.
+    </p>
+    
+    <div class="home-actions">
+      <button
+        class="btn btn-primary"
+        onclick="location.href='/login'"
+      >
+        Đăng nhập
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        onclick="location.href='/register'"
+      >
+        Đăng ký
+      </button>
+    </div>
+  </div>
+</body>
+</html>
