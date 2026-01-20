@@ -70,3 +70,13 @@ button:hover {
   margin-top: 15px;
   font-size: 14px;
 }
+.field-error {
+  color: #d32f2f;
+  font-size: 13px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+input {
+  margin-bottom: 4px;
+}

@@ -6,32 +6,42 @@ const path = require("path");
 const app = express();
 
 app.use(express.json());
+
 app.use("/api/auth", require("./routes/auth.route"));
 app.use("/api", require("./routes/profile.route"));
 
-// views & static
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
-// simple routes
 app.get("/dashboard", (req, res) => {
-  return res.render("dashboard");
+  res.render("dashboard");
 });
 
 app.get("/login", (req, res) => {
-  return res.render("login");
+  res.render("login");
 });
 
 app.get("/register", (req, res) => {
-  return res.render("register");
+  res.render("register");
 });
 
 app.get("/", (req, res) => {
-  return res.send("Server is running");
+  res.send("Server is running");
 });
 
-// try connect to Mongo but do not block server start
+app.use((err, req, res, next) => {
+  console.error("Error:", err);
+
+  if (req.originalUrl.startsWith("/api")) {
+    return res.status(err.status || 500).json({
+      message: err.message || "Lỗi hệ thống"
+    });
+  }
+
+  res.status(500).render("error");
+});
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error("MongoDB error:", err.message));

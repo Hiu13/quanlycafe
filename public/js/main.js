@@ -30,37 +30,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Register form
-  const registerForm = document.getElementById('registerForm');
-  const registerMsg = document.getElementById('message');
-  if (registerForm) {
-    registerForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      try {
-        const res = await fetch('/api/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, password })
-        });
-        const data = await res.json();
-        if (res.ok) {
-          registerMsg.style.color = 'green';
-          registerMsg.textContent = 'Đăng ký thành công. Vui lòng kiểm tra email để xác thực tài khoản.';
-          registerForm.reset();
+ // Register form
+const registerForm = document.getElementById('registerForm');
+const registerMsg = document.getElementById('message');
+
+if (registerForm) {
+  registerForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Clear lỗi cũ
+    ['name', 'email', 'password'].forEach(field => {
+      const errEl = document.getElementById(`${field}-error`);
+      if (errEl) errEl.textContent = '';
+    });
+    registerMsg.textContent = '';
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        registerMsg.style.color = 'green';
+        registerMsg.textContent = 'Đăng ký thành công. Vui lòng đăng nhập.';
+        registerForm.reset();
+      } else {
+        registerMsg.style.color = 'red';
+
+        // Trường hợp lỗi validate từ backend
+        if (data.errors && Array.isArray(data.errors)) {
+          data.errors.forEach(err => {
+            const el = document.getElementById(`${err.path}-error`);
+            if (el) {
+              el.textContent = err.msg;
+            }
+          });
         } else {
           registerMsg.textContent = data.message || 'Đăng ký thất bại';
         }
-      } catch (err) {
-        console.error(err);
-        registerMsg.textContent = 'Lỗi mạng, thử lại sau';
       }
-    });
-  }
+    } catch (err) {
+      console.error(err);
+      registerMsg.style.color = 'red';
+      registerMsg.textContent = 'Lỗi mạng, thử lại sau';
+    }
+  });
+}
 });
-
 function logout() {
   localStorage.removeItem('token');
   location.href = '/';

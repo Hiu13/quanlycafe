@@ -10,37 +10,39 @@
 <body>
   <div class="login-container">
     <h1>Coffee Management System</h1>
-    <p class="subtitle">
-      Hệ thống quản lý quán cà phê
-    </p>
+    <p class="subtitle">Hệ thống quản lý quán cà phê</p>
 
     <h3 class="form-title">Tạo tài khoản</h3>
 
-    <form id="registerForm">
+    <form id="registerForm" novalidate>
+      <!-- NAME -->
       <input
         type="text"
         id="name"
-        placeholder="Họ và tên"
-        required
+        placeholder="Tên đăng nhập"
       />
+      <small id="name-error" class="field-error"></small>
 
+      <!-- EMAIL -->
       <input
         type="email"
         id="email"
         placeholder="Email"
-        required
       />
+      <small id="email-error" class="field-error"></small>
 
+      <!-- PASSWORD -->
       <input
         type="password"
         id="password"
         placeholder="Mật khẩu"
-        required
       />
+      <small id="password-error" class="field-error"></small>
 
       <button type="submit">Đăng ký</button>
     </form>
 
+    <!-- MESSAGE CHUNG -->
     <p id="message" class="message"></p>
 
     <p class="switch-link">
